@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Circular:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,23 +7,21 @@
 :root {
   --foreground-rgb: 34, 34, 34;
   --background-rgb: 255, 255, 255;
-  --primary-color: #FF5A5F;
-  --gray-light: #DDDDDD;
-  --gray-medium: #717171;
-  --gray-dark: #222222;
+  --airbnb-red: #FF385C;
+  --airbnb-dark: #222222;
+  --airbnb-gray: #717171;
+  --airbnb-light-gray: #DDDDDD;
+  --airbnb-bg-gray: #F7F7F7;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-rgb: 34, 34, 34;
-  }
+* {
+  font-family: 'Circular', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Circular', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 @layer utilities {
@@ -30,11 +30,11 @@ body {
   }
   
   .airbnb-red {
-    color: #FF5A5F;
+    color: #FF385C;
   }
   
   .bg-airbnb-red {
-    background-color: #FF5A5F;
+    background-color: #FF385C;
   }
   
   .border-airbnb {
@@ -43,5 +43,22 @@ body {
   
   .hover\:bg-gray-50:hover {
     background-color: #F7F7F7;
+  }
+  
+  .card-shadow {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+  
+  .card-shadow-hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    transition: box-shadow 0.2s ease;
+  }
+  
+  .card-shadow-hover:hover {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+  }
+  
+  .search-shadow {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   }
 }

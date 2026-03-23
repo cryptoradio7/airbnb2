@@ -23,28 +23,28 @@ export default function SearchBar() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center">
+    <div className="max-w-5xl mx-auto px-4">
+      <h1 className="text-5xl md:text-6xl font-bold mb-8 text-center tracking-tight">
         Trouvez des logements uniques
         <br />
-        <span className="text-[#FF5A5F]">pour vos prochaines vacances</span>
+        <span className="text-[#FF385C]">pour vos prochaines vacances</span>
       </h1>
 
       <form 
         onSubmit={handleSearch}
-        className="bg-white rounded-2xl shadow-xl p-2 md:p-1 border border-gray-200"
+        className="bg-white rounded-2xl shadow-xl p-1 border border-gray-200 search-shadow"
       >
         <div className="flex flex-col md:flex-row items-center">
           {/* Destination */}
           <div className="flex-1 w-full md:w-auto">
             <div className="px-6 py-4 md:py-3 border-b md:border-b-0 md:border-r border-gray-200">
-              <label className="block text-xs font-semibold text-gray-800 mb-1">
-                OÙ
+              <label className="block text-xs font-semibold text-gray-800 mb-1 uppercase tracking-wider">
+                Destination
               </label>
               <input
                 type="text"
                 placeholder="Rechercher une destination"
-                className="w-full text-lg placeholder-gray-400 outline-none"
+                className="w-full text-lg placeholder-gray-400 outline-none font-medium"
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
               />
@@ -54,12 +54,12 @@ export default function SearchBar() {
           {/* Check-in */}
           <div className="flex-1 w-full md:w-auto">
             <div className="px-6 py-4 md:py-3 border-b md:border-b-0 md:border-r border-gray-200">
-              <label className="block text-xs font-semibold text-gray-800 mb-1">
-                ARRIVÉE
+              <label className="block text-xs font-semibold text-gray-800 mb-1 uppercase tracking-wider">
+                Arrivée
               </label>
               <input
                 type="date"
-                className="w-full text-lg text-gray-700 outline-none"
+                className="w-full text-lg text-gray-700 outline-none font-medium"
                 value={checkIn}
                 onChange={(e) => setCheckIn(e.target.value)}
               />
@@ -69,12 +69,12 @@ export default function SearchBar() {
           {/* Check-out */}
           <div className="flex-1 w-full md:w-auto">
             <div className="px-6 py-4 md:py-3 border-b md:border-b-0 md:border-r border-gray-200">
-              <label className="block text-xs font-semibold text-gray-800 mb-1">
-                DÉPART
+              <label className="block text-xs font-semibold text-gray-800 mb-1 uppercase tracking-wider">
+                Départ
               </label>
               <input
                 type="date"
-                className="w-full text-lg text-gray-700 outline-none"
+                className="w-full text-lg text-gray-700 outline-none font-medium"
                 value={checkOut}
                 onChange={(e) => setCheckOut(e.target.value)}
               />
@@ -84,20 +84,22 @@ export default function SearchBar() {
           {/* Guests */}
           <div className="flex-1 w-full md:w-auto">
             <div className="px-6 py-4 md:py-3 border-b md:border-b-0 md:border-r border-gray-200">
-              <label className="block text-xs font-semibold text-gray-800 mb-1">
-                VOYAGEURS
+              <label className="block text-xs font-semibold text-gray-800 mb-1 uppercase tracking-wider">
+                Voyageurs
               </label>
-              <select
-                className="w-full text-lg text-gray-700 outline-none bg-transparent"
-                value={guests}
-                onChange={(e) => setGuests(e.target.value)}
-              >
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-                  <option key={num} value={num}>
-                    {num} {num === 1 ? 'voyageur' : 'voyageurs'}
-                  </option>
-                ))}
-              </select>
+              <div className="flex items-center justify-between">
+                <select
+                  className="w-full text-lg text-gray-700 outline-none font-medium bg-transparent"
+                  value={guests}
+                  onChange={(e) => setGuests(e.target.value)}
+                >
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                    <option key={num} value={num}>
+                      {num} {num === 1 ? 'voyageur' : 'voyageurs'}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
 
@@ -105,14 +107,34 @@ export default function SearchBar() {
           <div className="w-full md:w-auto">
             <button
               type="submit"
-              className="w-full md:w-auto bg-[#FF5A5F] text-white rounded-xl md:rounded-full p-4 md:p-3 flex items-center justify-center gap-2 hover:bg-[#E14B50] transition-colors"
+              className="w-full md:w-auto bg-[#FF385C] text-white rounded-xl md:rounded-full p-4 md:p-3 flex items-center justify-center gap-3 hover:bg-[#E14B50] transition-colors font-semibold text-lg"
             >
-              <Search size={20} />
-              <span className="font-semibold">Rechercher</span>
+              <Search size={22} />
+              <span>Rechercher</span>
             </button>
           </div>
         </div>
       </form>
+
+      {/* Quick Suggestions */}
+      <div className="mt-8 flex flex-wrap gap-4 justify-center">
+        {[
+          'Flexible sur les dates',
+          'Annulation gratuite',
+          'WiFi',
+          'Cuisine',
+          'Lave-linge',
+          'Climatisation',
+          'Parking gratuit',
+        ].map((tag) => (
+          <button
+            key={tag}
+            className="px-4 py-2 border border-gray-300 rounded-full hover:border-gray-900 text-sm font-medium"
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
     </div>
   )
 }
