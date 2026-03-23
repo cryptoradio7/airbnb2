@@ -1,65 +1,57 @@
-import Image from "next/image";
+import SearchBar from '@/components/SearchBar'
+import CategoryGrid from '@/components/CategoryGrid'
+import PopularListings from '@/components/PopularListings'
 
-export default function Home() {
+export default async function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="pb-16">
+      {/* Hero Section */}
+      <section className="pt-12 pb-16 px-4 bg-gradient-to-b from-white to-gray-50">
+        <SearchBar />
+      </section>
+
+      {/* Categories */}
+      <section className="container mx-auto px-4 py-8">
+        <h2 className="text-3xl font-bold mb-8">Explorer par type de logement</h2>
+        <CategoryGrid />
+      </section>
+
+      {/* Popular Listings */}
+      <section className="container mx-auto px-4 py-8">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-3xl font-bold">Logements populaires</h2>
+          <button className="text-[#FF5A5F] font-semibold hover:underline">
+            Tout afficher →
+          </button>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <PopularListings />
+      </section>
+
+      {/* Inspiration Section */}
+      <section className="container mx-auto px-4 py-8">
+        <h2 className="text-3xl font-bold mb-8">Inspirations pour votre prochain voyage</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            { city: 'Paris', country: 'France', image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80' },
+            { city: 'Lyon', country: 'France', image: 'https://images.unsplash.com/photo-1569949381669-ecf31b5c55f9?w=800&q=80' },
+            { city: 'Marseille', country: 'France', image: 'https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=800&q=80' },
+            { city: 'Nice', country: 'France', image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80' },
+          ].map((dest) => (
+            <div key={dest.city} className="relative rounded-2xl overflow-hidden group">
+              <div className="aspect-[3/4] bg-gray-200">
+                <div 
+                  className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-300"
+                  style={{ backgroundImage: `url(${dest.image})` }}
+                />
+              </div>
+              <div className="absolute bottom-4 left-4 text-white">
+                <h3 className="text-xl font-bold">{dest.city}</h3>
+                <p className="text-sm opacity-90">{dest.country}</p>
+              </div>
+            </div>
+          ))}
         </div>
-      </main>
+      </section>
     </div>
-  );
+  )
 }

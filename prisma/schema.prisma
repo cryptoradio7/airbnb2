@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Listing {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  price       Int      // price per night in EUR
+  location    String   // full address
+  city        String
+  country     String   @default("France")
+  lat         Float
+  lng         Float
+  rating      Float    @default(4.5)
+  reviewCount Int      @default(0)
+  maxGuests   Int      @default(2)
+  bedrooms    Int      @default(1)
+  bathrooms   Int      @default(1)
+  type        String   @default("Entire apartment")
+  images      String   // JSON string array of image URLs
+  amenities   String   // JSON string array of amenity names
+  hostId      String
+  host        Host     @relation(fields: [hostId], references: [id], onDelete: Cascade)
+  reviews     Review[]
+  createdAt   DateTime @default(now())
+
+  @@index([city])
+  @@index([price])
+  @@index([rating])
+}
+
+model Host {
+  id          String   @id @default(cuid())
+  name        String
+  avatar      String   // avatar image URL
+  joinedYear  Int
+  bio         String?
+  rating      Float    @default(4.8)
+  reviewCount Int      @default(0)
+  listings    Listing[]
+  createdAt   DateTime @default(now())
+}
+
+model Review {
+  id          String   @id @default(cuid())
+  listingId   String
+  listing     Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  authorName  String
+  authorAvatar String
+  rating      Int      // 1-5
+  comment     String
+  date        DateTime @default(now())
+}
